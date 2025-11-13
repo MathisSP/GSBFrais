@@ -1,0 +1,52 @@
+DEBUG - 2025-10-15 07:00:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-15 07:00:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-15 07:00:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-15 07:00:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-10-15 07:00:17 --> Error: Call to undefined method CurlHandle::get()
+[Method: GET, Route: accueil]
+in APPPATH\Controllers\Accueil.php on line 54.
+ 1 APPPATH\Controllers\Accueil.php(25): App\Controllers\Accueil->getRssFeed()
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Accueil->index()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Accueil))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('Z:\\BTS2Bis\\Ap groupe\\GSBFraisCI4-V2\\public\\index.php')
+DEBUG - 2025-10-15 07:53:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-15 07:53:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-15 07:53:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-10-15 07:53:12 --> Error: Call to undefined method CurlHandle::get()
+[Method: GET, Route: accueil]
+in APPPATH\Controllers\Accueil.php on line 54.
+ 1 APPPATH\Controllers\Accueil.php(25): App\Controllers\Accueil->getRssFeed()
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Accueil->index()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Accueil))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('Z:\\BTS2Bis\\Ap groupe\\GSBFraisCI4-V2\\public\\index.php')
+DEBUG - 2025-10-15 07:54:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-10-15 07:54:45 --> ErrorException: Undefined array key "link"
+[Method: GET, Route: accueil]
+in APPPATH\Views\actualites.php on line 14.
+ 1 APPPATH\Views\actualites.php(14): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "link"', 'Z:\\BTS2Bis\\Ap groupe\\GSBFraisCI4-V2\\app\\Views\\actualites.php', 14)
+ 2 SYSTEMPATH\View\View.php(226): include('Z:\\BTS2Bis\\Ap groupe\\GSBFraisCI4-V2\\app\\Views\\actualites.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('actualites', [], true)
+ 5 APPPATH\Controllers\Accueil.php(31): view('actualites', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Accueil->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Accueil))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('Z:\\BTS2Bis\\Ap groupe\\GSBFraisCI4-V2\\public\\index.php')
+DEBUG - 2025-10-15 07:57:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-15 08:03:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-15 08:57:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-15 09:04:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-15 09:04:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-15 09:06:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-10-15 09:57:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
