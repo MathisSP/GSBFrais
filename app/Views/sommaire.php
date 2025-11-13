@@ -37,7 +37,7 @@
                 <?= anchor('valideFicheFrais', 'Valider fiche de frais', ['title' => 'Valider fiche de frais']) ?>
             </li>
             <li <?= (esc($session->get('idRole')) != 'c') ? 'hidden' : '' ?>>
-                <?= anchor('suiviFicheFrais', 'Suivi du paiment', ['title' => 'Suivi des fiches de frais']) ?>
+                <?= anchor('suiviFicheFrais', 'Suivi du paiment', ['title' => 'Suivii des fiches de frais']) ?>
             </li>
         <!-- fin du hidden-->
     </ul>
