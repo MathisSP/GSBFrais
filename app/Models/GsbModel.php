@@ -8,11 +8,17 @@ use App\Libraries\Gsb_lib;
 class GsbModel extends Model
 {
     /** Retourne les informations d'un utilisateur */
-    public function get_infos_visiteur($login, $mdp)
+    public function get_infos_utilisateur($login, $mdp)
     {
-        return $this->db->table('utilisateur')
-            ->select('idUtilisateur, nom, prenom, login, utilisateur.idRole, role.libelleRole')
-            ->join('role', 'role.idRole = utilisateur.idRole')
+        // return $this->db->table('utilisateur')
+        //     ->select('idUtilisateur, nom, prenom, login, utilisateur.idRole, role.libelleRole')
+        //     ->join('role', 'role.idRole = utilisateur.idRole')
+        //     ->where('login', $login)
+        //     ->where('mdp', $mdp)
+        //     ->get()
+        //     ->getRowArray();
+
+        return $this->db->table('infos_utilisateurs')
             ->where('login', $login)
             ->where('mdp', $mdp)
             ->get()
@@ -167,6 +173,11 @@ class GsbModel extends Model
     /** Met à jour l'état d'une fiche */
     public function maj_etat_fiche_frais($idFiche, $etat)
     {
+        // $this->db->table('fichefrais')->update(
+        //     ['idEtat' => $etat, 'dateModif' => date('Y-m-d')],
+        //     ['idFiche' => $idFiche]
+        // );
+
         $this->db->table('fichefrais')->update(
             ['idEtat' => $etat, 'dateModif' => date('Y-m-d')],
             ['idFiche' => $idFiche]

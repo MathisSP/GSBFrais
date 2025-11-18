@@ -49,7 +49,7 @@ class Connexion extends BaseController
         $login = $this->request->getPost('txtLogin');
         $mdp = $this->request->getPost('pwdMdp');
 
-        $utilisateur = $this->gsb_model->get_infos_visiteur($login, $mdp);
+        $utilisateur = $this->gsb_model->get_infos_utilisateur($login, $mdp);
 
         if ($utilisateur) {
             session()->set([
