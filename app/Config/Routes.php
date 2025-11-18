@@ -13,9 +13,9 @@ $routes->get('/connexion/deconnexion', 'Connexion::deconnexion');
 $routes->get('/accueil', 'Accueil::index');  
 
 $routes->get('gererfrais', 'GererFrais::index');
-$routes->post('gererfrais/maj_fraisforfait', 'GererFrais::valider_maj_fraisforfait');
-$routes->post('gererfrais/creation_fraishorsforfait', 'GererFrais::valider_creation_fraishorsforfait');
-$routes->get('gererfrais/supp_fraishorsforfait/(:num)', 'GererFrais::supprimer_fraishorsforfait/$1');
+$routes->post('gererfrais/maj_fraisforfait', 'Gererfrais::valider_maj_fraisforfait');
+$routes->post('gererfrais/creation_fraishorsforfait', 'Gererfrais::valider_creation_fraishorsforfait');
+$routes->get('gererfrais/supp_fraishorsforfait/(:num)', 'Gererfrais::supprimer_fraishorsforfait/$1');
 
 $routes->get('etatfrais', 'EtatFrais::index');
 $routes->post('etatfrais/mois', 'EtatFrais::selectionner_mois');
