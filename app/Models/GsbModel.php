@@ -29,7 +29,7 @@ class GsbModel extends Model
     public function get_detail_visiteur($idUtilisateur)
     {
         return $this->db->table('utilisateur')
-            ->where('idUtilisateur', $id)
+            ->where('idUtilisateur', $idUtilisateur)
             ->get()
             ->getRowArray();
     }
@@ -178,10 +178,9 @@ class GsbModel extends Model
         //     ['idFiche' => $idFiche]
         // );
 
-        $this->db->table('fichefrais')->update(
-            ['idEtat' => $etat, 'dateModif' => date('Y-m-d')],
-            ['idFiche' => $idFiche]
-        );
+        $sql = "CALL maj_etat_fiche_frais_ps(?,?)";
+		
+		return $this->db->query($sql, [$idFiche,$etat]);
     }
 
     /** Met à jour les frais forfait */
@@ -204,7 +203,11 @@ class GsbModel extends Model
     /** Supprime un frais hors forfait */
     public function supprimer_frais_hors_forfait($idFrais)
     {
-        return $this->db->table('lignefraishorsforfait')->delete(['idLigneFHF' => $idFrais]);
+        // return $this->db->table('lignefraishorsforfait')->delete(['idLigneFHF' => $idFrais]);
+
+        $sql = "CALL supprimer_frais_hors_forfait_ps(?)";
+		
+		return $this->db->query($sql, [$idFrais]);
     }
 
     /** Crée un nouveau frais hors forfait */
@@ -218,4 +221,24 @@ class GsbModel extends Model
         ]);
         return $resultat;
     }
+
+    public function get_fiches_validees_comptable()
+    {
+        return $this->db->table('fichefrais f')
+            ->select('
+                f.idFiche,
+                f.annee,
+                f.mois,
+                u.nom,
+                u.prenom
+            ')
+            ->join('utilisateur u', 'u.idUtilisateur = f.idUtilisateur')
+            ->where('f.idEtat', 'VA')
+            ->orderBy('u.nom')
+            ->orderBy('f.annee', 'DESC')
+            ->orderBy('f.mois', 'DESC')
+            ->get()
+            ->getResultArray();
+    }
+
 }

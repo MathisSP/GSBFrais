@@ -500,3 +500,21 @@ input.bouton {
 #contenu strong {
 	font-weight: bold;
 }
+
+.btn-rembourser {
+    display: inline-block;
+    float: right;
+    margin-top: 20px;
+    background-color: #2f5faa;
+    color: #ffffff !important;
+    padding: 10px 18px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 4px;
+    border: 1px solid #244a84;
+}
+
+.btn-rembourser:hover {
+    background-color: #244a84;
+    color: #ffffff !important;
+}

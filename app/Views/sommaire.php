@@ -15,6 +15,9 @@
             <li>
                 <?= anchor('connexion/deconnexion', 'Déconnexion', ['title' => 'Se déconnecter']) ?>
             </li>
+            <li>
+                <?= anchor('connexion/deconnexion', 'Changer Mdp', ['title' => 'Changer de mdp']) ?>
+            </li>
         </ul> 
     </div>  
 
@@ -34,7 +37,7 @@
 
         <!-- hidden tout les rôles sauf comptable -->
         <li <?= (esc($session->get('idRole')) != 'c') ? 'hidden' : '' ?>> 
-                <?= anchor('valideFicheFrais', 'Valider fiche de frais', ['title' => 'Valider fiche de frais']) ?>
+                <?= anchor('rembourserfrais', 'Rembourser fiche de frais', ['title' => 'Rembourser fiche de frais']) ?>
             </li>
             <li <?= (esc($session->get('idRole')) != 'c') ? 'hidden' : '' ?>>
                 <?= anchor('suiviFicheFrais', 'Suivi du paiment', ['title' => 'Suivii des fiches de frais']) ?>
