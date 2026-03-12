@@ -59,5 +59,4 @@ class Accueil extends BaseController
 
         return $articles;
     }
-
 }

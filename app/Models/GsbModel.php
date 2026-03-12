@@ -241,4 +241,10 @@ class GsbModel extends Model
             ->getResultArray();
     }
 
+    public function updateMdpUtilisateur($idUtilisateur, $mdp)
+    {
+        return $this->db->table('utilisateur')->update(
+                ['mdp' => $mdp, 'date_modif_mdp' => date('Y-m-d H:i:s')] , ['idUtilisateur' => $idUtilisateur]
+            );
+    }
 }

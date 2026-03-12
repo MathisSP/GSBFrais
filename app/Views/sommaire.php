@@ -16,7 +16,7 @@
                 <?= anchor('connexion/deconnexion', 'Déconnexion', ['title' => 'Se déconnecter']) ?>
             </li>
             <li>
-                <?= anchor('connexion/deconnexion', 'Changer Mdp', ['title' => 'Changer de mdp']) ?>
+                <?= anchor('changerMdp', 'Changer Mdp', ['title' => 'Changer de mdp']) ?>
             </li>
         </ul> 
     </div>  
