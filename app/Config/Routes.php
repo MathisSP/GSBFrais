@@ -12,7 +12,8 @@ $routes->get('/connexion/deconnexion', 'Connexion::deconnexion');
 
 $routes->get('/accueil', 'Accueil::index');  
 
-$routes->get('/changerMdp', 'ChangerMdp::changerMdp');
+$routes->get('/changerMdp', 'ModificationMdp::changerMdp');
+$routes->post('/ModificationMdp/validerChangerMdp', 'ModificationMdp::validerChangerMdp');
 
 $routes->get('gererfrais', 'GererFrais::index');
 $routes->post('gererfrais/maj_fraisforfait', 'Gererfrais::valider_maj_fraisforfait');

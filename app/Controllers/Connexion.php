@@ -58,6 +58,7 @@ class Connexion extends BaseController
                 'prenom' => $utilisateur['prenom'],
                 'idRole' => $utilisateur['idRole'],
                 'libelleRole' => $utilisateur['libelleRole'],
+                'date_modif_mdp' => $utilisateur['date_modif_mdp'],
                 'isLoggedIn' => true
             ]);
             return redirect()->to('/accueil');
