@@ -2,15 +2,25 @@
 
 namespace App\Controllers;
 
+/**
+* Le controlleur accueil permettant d'avoir le flux rss 
+*/
 class Accueil extends BaseController
 {
+    /**
+     * Constructeur du controlleur Accueil
+     */
     public function __construct()
     {
         // On charge le helper URL et HTML
         helper(['url', 'html']);
     }
 
-    /** Méthode par défaut */
+    /**
+     * Méthode par défaut de la page d'accueil , affiche les views nécessaires pour que la page fonctionne correctement
+     *
+     * @return void affiche la page
+     */
     public function index()
     {
         // Vérifie si l’utilisateur est connecté
@@ -28,7 +38,11 @@ class Accueil extends BaseController
             . view('actualites', $data)
             . view('structures/page_pied');
     }
-
+    /**
+     * Récupérer le flux RSS pour afficher sur la page d'accueil
+     *
+     * @return void
+     */
     private function getRssFlux()
     {
         $url = 'https://www.santemagazine.fr/feeds/rss/sante';

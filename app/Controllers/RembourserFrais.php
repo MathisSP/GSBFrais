@@ -5,13 +5,18 @@ namespace App\Controllers;
 use App\Models\GsbModel;
 use App\Libraries\Gsb_lib;
 
+/**
+* Le controlleur RembourserFrais permettant rembourser les fiches de frais des visiteurs de la base de donnée pour modifier les frais de chacun des visiteurs (comptable)
+*/
 class RembourserFrais extends BaseController
 {
     private $id_fiche;
 
     protected $gsb_model;
     protected $gsb_lib;
-
+    /**
+     * Constructeur du controlleur RembourserFrais
+     */
     public function __construct()
     {
         helper(['url', 'form']);
@@ -19,7 +24,11 @@ class RembourserFrais extends BaseController
         $this->gsb_model = new GsbModel();
         $this->gsb_lib   = new Gsb_lib();
     }
-
+    /**
+     * Verifie si l'utilisateur est connecter
+     *
+     * @return void
+     */
     public function index()
     {
         if (!session()->get('isLoggedIn')) {
@@ -29,13 +38,23 @@ class RembourserFrais extends BaseController
         $this->id_fiche = null;
         return $this->commun();
     }
-
+    /**
+     * Permet de choisir la fiche de frais 
+     *
+     * @return void
+     */
     public function selectionner()
     {
         $this->id_fiche = $this->request->getPost('lstFiche');
         return $this->commun();
     }
 
+    /**
+     * Permet de rembourser la fiche de frais choisir par l'utilisateur
+     *
+     * @param [type] $idFiche id de la fiche choisit par l'utilisateur
+     * @return void
+     */
     public function rembourser($idFiche)
     {
         $this->gsb_model->maj_etat_fiche_frais($idFiche, 'RB');
@@ -43,7 +62,11 @@ class RembourserFrais extends BaseController
         return redirect()->to('/rembourserfrais')
             ->with('message', 'La fiche a été remboursée');
     }
-
+    /**
+     * affiche la page avec ses views correspondant afin de la faire fonctionner correctement 
+     *
+     * @return void
+     */
     private function commun()
     {
         echo view('structures/page_entete');

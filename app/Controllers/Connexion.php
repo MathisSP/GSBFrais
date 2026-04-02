@@ -3,10 +3,16 @@ namespace App\Controllers;
 
 use App\Models\GsbModel;
 
+/**
+* Le controlleur Connexion permettant de se connecter au site web
+*/
 class Connexion extends BaseController
 {
     protected $gsb_model;
 
+    /**
+     * Constructeur du controlleur Connexion
+     */
     public function __construct()
     {
         helper(['url', 'form']); // helpers URL et form
@@ -16,6 +22,8 @@ class Connexion extends BaseController
 
     /**
      * Affiche l’écran de connexion
+     *
+     * @return void 
      */
     public function login()
     {
@@ -27,6 +35,8 @@ class Connexion extends BaseController
 
     /**
      * Valide la saisie du formulaire de connexion
+     *
+     * @return void si l'utilisateur est valide , sa va le connecter a la page 
      */
     public function valider()
     {
@@ -69,6 +79,8 @@ class Connexion extends BaseController
 
     /**
      * Déconnecte l’utilisateur
+     *
+     * @return void
      */
     public function deconnexion()
     {

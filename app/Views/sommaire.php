@@ -1,6 +1,5 @@
-<?php $session = session(); ?>
-
-<?php // var_dump(esc($session->get('idRole')));?>
+<?php $session = session(); ?> 
+<?php // var_dump(esc($session->get('idRole'))); ?>
 
 <div id="menuGauche">
     <div id="infosUtil">

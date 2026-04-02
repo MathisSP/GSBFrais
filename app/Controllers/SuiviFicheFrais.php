@@ -5,6 +5,9 @@ namespace App\Controllers;
 use App\Models\GsbModel;
 use App\Libraries\Gsb_lib;
 
+/**
+* Le controlleur SuiviFicheFrais (pas fait) (comptable)
+*/
 class SuiviFicheFrais extends BaseController
 {
     private $id_annee;
@@ -13,14 +16,20 @@ class SuiviFicheFrais extends BaseController
     private $id_visiteur;
     protected $gsb_lib;
     protected $gsb_model;
-
+    /**
+     * Constructeur du controlleur SuiviFicheFrais
+     */
     public function __construct()
     {
         helper(['url', 'form']);
         $this->gsb_model = new GsbModel();
     }
 
-    /** Méthode par défaut */
+    /**
+     * Verifie si l'utilisateur est connecter et ensuite affichage de la page (la page n'a pas été faite donc la page est en travaux)
+     *
+     * @return void
+     */
     public function index()
     {
         // Vérifie si l’utilisateur est connecté

@@ -5,6 +5,9 @@ namespace App\Controllers;
 use App\Models\GsbModel;
 use App\Libraries\Gsb_lib;
 
+/**
+* Le controlleur Etatfrais permettant de voir l'etat de sa fiche de frais (visiteur)
+*/
 class Etatfrais extends BaseController
 {
     private $annee_mois;
@@ -13,6 +16,9 @@ class Etatfrais extends BaseController
     protected $gsb_lib;
     protected $gsb_model;
 
+    /**
+     * Constructeur du controlleur Etatfrais
+     */
     public function __construct()
     {
         helper(['url', 'form']);
@@ -23,7 +29,11 @@ class Etatfrais extends BaseController
         $this->id_visiteur = session()->get('idUtilisateur');
     }
 
-    /** Méthode par défaut */
+    /**
+     * Verifie si l'utilisateur est connecter et cmet le mois/année et l'id de la fiche en null
+     *
+     * @return void
+     */
     public function index()
     {
         // Vérifie si l’utilisateur est connecté
@@ -36,14 +46,22 @@ class Etatfrais extends BaseController
         return $this->commun();
     }
 
-    /** Sélection d’un mois depuis la liste déroulante */
+    /**
+     * Sélection d’un mois depuis la liste déroulante
+     *
+     * @return void affiche la liste déroulante avec tous les mois inséré
+     */
     public function selectionner_mois()
     {
         $this->annee_mois = $this->request->getPost('lstMois');
         return $this->commun();
     }
 
-    /** Traitement commun pour affichage de la page */
+    /**
+     * Traitement de base pour l'affichage de la page etatfrais seulement visible pour les visiteurs
+     *
+     * @return void
+     */
     private function commun()
     {
         echo view('structures/page_entete');

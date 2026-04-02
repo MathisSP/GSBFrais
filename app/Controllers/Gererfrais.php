@@ -5,6 +5,9 @@ namespace App\Controllers;
 use App\Models\GsbModel;
 use App\Libraries\Gsb_lib;
 
+/**
+* Le controlleur Etatfrais permettant de gérer l'état de sa fiche de frais des visiteurs (visiteur)
+*/
 class Gererfrais extends BaseController
 {
     private $id_annee;
@@ -14,6 +17,9 @@ class Gererfrais extends BaseController
     protected $gsb_lib;
     protected $gsb_model;
 
+    /**
+     * Constructeur du controlleur Gererfrais
+     */
     public function __construct()
     {
         helper(['url', 'form', 'html']);
@@ -32,7 +38,11 @@ class Gererfrais extends BaseController
         }
     }
 
-    /** Méthode par défaut */
+    /**
+     * Méthode par défaut de la page GererFrais , seulement accessible par les visiteurs pour modifier ses frais et aussi verifie si l'utilisateur est connecter
+     *
+     * @return void
+     */
     public function index()
     {
         // Vérifie si l’utilisateur est connecté
@@ -55,8 +65,11 @@ class Gererfrais extends BaseController
         }
         return $this->commun($data);
     }
-
-    /** Validation des frais forfaitaires */
+    /**
+     * Validation des frais forfaitaires par un bouton valider
+     *
+     * @return void
+     */
     public function valider_maj_fraisforfait()
     {
         $lesFrais = $this->request->getPost('lesFrais');
@@ -69,7 +82,11 @@ class Gererfrais extends BaseController
         return $this->commun($data);
     }
 
-    /** Création d'un nouveau frais hors forfait */
+    /**
+     * Création d'un nouveau frais hors forfait
+     *
+     * @return void
+     */
     public function valider_creation_fraishorsforfait()
     {
         $reglesSaisie = [
@@ -105,8 +122,12 @@ class Gererfrais extends BaseController
 
         return $this->commun($data);
     }
-
-    /** Suppression d'un frais hors forfait */
+    /**
+     * Suppression d'un frais hors forfait
+     *
+     * @param [type] $id_fraishorsforfait l'id du frais hors forfait choisit
+     * @return bool si le frais a bien été supprimer ou non 
+     */
     public function supprimer_fraishorsforfait($id_fraishorsforfait)
     {
         $suppOk = $this->gsb_model->supprimer_frais_hors_forfait($id_fraishorsforfait);
@@ -117,7 +138,12 @@ class Gererfrais extends BaseController
         }
         return $this->commun($data);
     }
-
+    /**
+     * affiche la page de base avec les views necessaire pour son fonctionnement
+     *
+     * @param [type] $data
+     * @return void
+     */
     private function commun($data)
     {
         echo view('structures/page_entete');
