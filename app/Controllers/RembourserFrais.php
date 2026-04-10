@@ -80,8 +80,7 @@ class RembourserFrais extends BaseController
         $fiches = $this->gsb_model->get_fiches_validees_comptable();
 
         if (count($fiches) === 0) {
-            return redirect()->back()
-                ->with('erreurs', 'Aucune fiche validée à rembourser');
+            return redirect()->back()->with('erreurs', 'Aucune fiche validée à rembourser');
         }
 
         if (!isset($this->id_fiche)) {
