@@ -24,6 +24,11 @@ $routes->get('etatfrais', 'EtatFrais::index');
 $routes->post('etatfrais/mois', 'EtatFrais::selectionner_mois');
 
 $routes->get('suiviFicheFrais', 'SuiviFicheFrais::index');
+$routes->post('suiviFicheFrais/selectionner', 'SuiviFicheFrais::selectionner');
+$routes->get('suiviFicheFrais/valider/(:num)', 'SuiviFicheFrais::valider/$1');
+$routes->post('suiviFicheFrais/valider_maj_fraisforfait', 'SuiviFicheFrais::valider_maj_fraisforfait');
+$routes->get('suiviFicheFrais/reporter_fraishorsforfait/(:num)/(:num)', 'SuiviFicheFrais::reporter_fraishorsforfait/$1/$2');
+$routes->get('suiviFicheFrais/refuser_fraishorsforfait/(:num)/(:num)', 'SuiviFicheFrais::refuser_fraishorsforfait/$1/$2');
 
 $routes->get('rembourserfrais', 'RembourserFrais::index');
 $routes->post('rembourserfrais/selectionner', 'RembourserFrais::selectionner');

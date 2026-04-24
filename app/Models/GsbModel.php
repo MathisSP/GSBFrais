@@ -342,4 +342,41 @@ class GsbModel extends Model
                 ['mdp' => $mdp, 'date_modif_mdp' => date('Y-m-d H:i:s')] , ['idUtilisateur' => $idUtilisateur]
             );
     }
+
+    /**
+     * Fiches en état 'CL' (clôturées, en attente de validation comptable)
+     */
+    public function get_fiches_en_attente_validation()
+    {
+        return $this->db->table('fichefrais f')
+            ->select('f.idFiche, f.annee, f.mois, u.nom, u.prenom')
+            ->join('utilisateur u', 'u.idUtilisateur = f.idUtilisateur')
+            ->where('f.idEtat', 'CL')
+            ->orderBy('u.nom')
+            ->orderBy('f.annee', 'DESC')
+            ->orderBy('f.mois', 'DESC')
+            ->get()
+            ->getResultArray();
+    }
+
+    /**
+     * Retourne un seul frais hors forfait par son id
+     */
+    public function get_un_frais_hors_forfait($idFraisHF)
+    {
+        return $this->db->table('lignefraishorsforfait')
+            ->where('idLigneFHF', $idFraisHF)
+            ->get()
+            ->getRowArray();
+    }
+
+    /**
+     * Met à jour le libellé d'un frais hors forfait (report/refus)
+     */
+    public function maj_libelle_frais_hors_forfait($idFraisHF, $nouveauLibelle)
+    {
+        return $this->db->table('lignefraishorsforfait')
+            ->where('idLigneFHF', $idFraisHF)
+            ->update(['libelle' => $nouveauLibelle]);
+    }
 }

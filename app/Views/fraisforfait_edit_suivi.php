@@ -2,7 +2,7 @@
 
 <div id="sousContenu">
 
-    <?= form_open('suiviFicheFrais/maj_fraisforfait') ?>
+    <?= form_open('suiviFicheFrais/valider_maj_fraisforfait') ?>
 
     <input type="hidden" name="idFiche" value="<?= esc($idFiche) ?>">
 
