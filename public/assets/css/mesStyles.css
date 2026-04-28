@@ -69,12 +69,13 @@ a img {
 	width: 180px;
 }
 
+/* Supprimer l'ombre du bloc infos utilisateur */
 #menuGauche #infosUtil {
-	margin-top: 0;
-	padding: 0;
-	background-color: #DDD;
-	box-shadow: 5px 5px 5px #b8b8b8;
-	width: 180px;
+    margin-top: 0;
+    padding: 0;
+    background-color: #DDD;
+    box-shadow: none; /* était: 5px 5px 5px #b8b8b8 */
+    width: 180px;
 }
 
 #menuGauche #user {
@@ -260,12 +261,12 @@ table.listeLegere tr.nonvalide {
 	________________________________________________________ 
 */
 #sousContenu {
-	box-shadow: 5px 5px 5px #b8b8b8;
-	padding: 0;
-	margin: 0;
-	background-color: #d9ead3;
-	color: #073763;
-	white-space: nowrap; /* empêche le retour à la ligne */
+    box-shadow: none; /* était: 5px 5px 5px #b8b8b8 */
+	padding-bottom: 15px;
+    margin: 0;
+    background-color: #d9ead3;
+    color: #073763;
+    white-space: nowrap;
 }
 
 #sousContenu h3 {
@@ -501,7 +502,7 @@ input.bouton {
 	font-weight: bold;
 }
 
-.btn-rembourser {
+.btn-rembourser, .btn-valider {
     display: inline-block;
     float: right;
     margin-top: 20px;

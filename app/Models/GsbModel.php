@@ -379,4 +379,31 @@ class GsbModel extends Model
             ->where('idLigneFHF', $idFraisHF)
             ->update(['libelle' => $nouveauLibelle]);
     }
+
+    /**
+     * Calcule et met à jour le montant validé d'une fiche
+     */
+    public function maj_montant_valide($idFiche)
+    {
+        $forfaits = $this->db->table('lignefraisforfait lff')
+            ->select('SUM(lff.quantite * ff.montant) AS total')
+            ->join('fraisforfait ff', 'ff.idfraisforfait = lff.idFraisForfait')
+            ->where('lff.idFiche', $idFiche)
+            ->get()
+            ->getRowArray();
+
+        $horsForfait = $this->db->table('lignefraishorsforfait')
+            ->select('SUM(montant) AS total')
+            ->where('idFiche', $idFiche)
+            ->where('libelle NOT LIKE', 'REFUSE:%')
+            ->where('libelle NOT LIKE', 'REPORT:%') // ← ajouté
+            ->get()
+            ->getRowArray();
+
+        $montantTotal = ($forfaits['total'] ?? 0) + ($horsForfait['total'] ?? 0);
+
+        return $this->db->table('fichefrais')
+            ->where('idFiche', $idFiche)
+            ->update(['montantValide' => $montantTotal]);
+    }
 }

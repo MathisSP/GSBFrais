@@ -45,62 +45,68 @@ class SuiviFicheFrais extends BaseController
             ->with('message', 'La fiche a été validée');
     }
 
-    public function reporter_fraishorsforfait($idFraisHF, $idFiche)
-    {
-        $this->id_fiche = $idFiche;
-
-        $frais   = $this->gsb_model->get_un_frais_hors_forfait($idFraisHF);
-        $libelle = $frais['libelle'];
-
-        // Ne pas permettre le report si le frais est refusé
-        if (str_starts_with($libelle, 'REFUSE:')) {
-            return $this->commun();
-        }
-
-        // Si déjà reporté → on annule le report
-        if (str_starts_with($libelle, 'REPORT:')) {
-            $nouveauLibelle = substr($libelle, strlen('REPORT:'));
-            $this->gsb_model->maj_libelle_frais_hors_forfait($idFraisHF, $nouveauLibelle);
-        } else {
-            // Marquer comme reporté
-            $nouveauLibelle = 'REPORT:' . $libelle;
-            $this->gsb_model->maj_libelle_frais_hors_forfait($idFraisHF, $nouveauLibelle);
-        }
-
-        return $this->commun();
-    }
-
-    public function refuser_fraishorsforfait($idFraisHF, $idFiche)
-    {
-        $this->id_fiche = $idFiche;
-
-        $frais   = $this->gsb_model->get_un_frais_hors_forfait($idFraisHF);
-        $libelle = $frais['libelle'];
-
-        // Si déjà refusé → on annule le refus
-        if (str_starts_with($libelle, 'REFUSE:')) {
-            $nouveauLibelle = substr($libelle, strlen('REFUSE:'));
-            $this->gsb_model->maj_libelle_frais_hors_forfait($idFraisHF, $nouveauLibelle);
-        } else {
-            // Marquer comme refusé
-            $nouveauLibelle = 'REFUSE:' . $libelle;
-            $this->gsb_model->maj_libelle_frais_hors_forfait($idFraisHF, $nouveauLibelle);
-        }
-
-        return $this->commun();
-    }
-
     public function valider_maj_fraisforfait()
     {
         $this->id_fiche = $this->request->getPost('idFiche');
         $lesFrais       = $this->request->getPost('lesFrais');
 
         $resultatOk = $this->gsb_model->maj_frais_forfait($this->id_fiche, $lesFrais);
+        
+        // ← Recalcule le montant après modification des forfaits
+        $this->gsb_model->maj_montant_valide($this->id_fiche);
+        
         if ($resultatOk) {
             session()->setFlashdata('message', 'Les frais forfaitaires ont bien été modifiés');
         } else {
             session()->setFlashdata('erreurs', 'Problème lors de la modification des frais forfaitaires');
         }
+        return $this->commun();
+    }
+
+    public function refuser_fraishorsforfait($idFraisHF, $idFiche)
+    {
+        $this->id_fiche = $idFiche;
+        $frais   = $this->gsb_model->get_un_frais_hors_forfait($idFraisHF);
+        $libelle = $frais['libelle'];
+
+        $libelleNet = $libelle;
+        if (str_starts_with($libelle, 'REFUSE:')) {
+            $libelleNet = substr($libelle, strlen('REFUSE:'));
+        }
+        if (str_starts_with($libelleNet, 'REPORT:')) {
+            $libelleNet = substr($libelleNet, strlen('REPORT:'));
+        }
+
+        $nouveauLibelle = 'REFUSE:' . $libelleNet;
+        $this->gsb_model->maj_libelle_frais_hors_forfait($idFraisHF, $nouveauLibelle);
+
+        // ← Recalcule le montant après refus
+        $this->gsb_model->maj_montant_valide($idFiche);
+
+        return $this->commun();
+    }
+
+    public function reporter_fraishorsforfait($idFraisHF, $idFiche)
+    {
+        $this->id_fiche = $idFiche;
+        $frais   = $this->gsb_model->get_un_frais_hors_forfait($idFraisHF);
+        $libelle = $frais['libelle'];
+
+        if (str_starts_with($libelle, 'REFUSE:')) {
+            return $this->commun();
+        }
+
+        $libelleNet = $libelle;
+        if (str_starts_with($libelle, 'REPORT:')) {
+            $libelleNet = substr($libelle, strlen('REPORT:'));
+        }
+
+        $nouveauLibelle = 'REPORT:' . $libelleNet;
+        $this->gsb_model->maj_libelle_frais_hors_forfait($idFraisHF, $nouveauLibelle);
+
+        // ← Recalcule le montant (les reportés sont quand même comptés)
+        $this->gsb_model->maj_montant_valide($idFiche);
+
         return $this->commun();
     }
 
@@ -183,7 +189,6 @@ class SuiviFicheFrais extends BaseController
         foreach ($fraisHF as &$f) {
             $f['dateFraisFR']    = $this->gsb_lib->date_vers_francais($f['dateFrais']);
             $f['montantFormate'] = $this->gsb_lib->format_montant($f['montant']);
-            $f['estRefuse']      = str_starts_with($f['libelle'], 'REFUSE:');
         }
         unset($f);
 

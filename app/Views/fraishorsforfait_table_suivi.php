@@ -28,14 +28,18 @@ $nbJustificatifs = count($fraishorsforfait);
                     <td class="td-montant"><?= esc($frais['montantFormate']) ?></td>
 
                     <td class="td-center">
-                        <?php if ($estRefuse) : ?>
-                            <span class="icone-refus">✗</span>
+                        <?php if (!$estReporte) : ?>
+                            <?php if ($estRefuse) : ?>
+                                <span class="icone-refus">✗</span>
+                            <?php else : ?>
+                                <?= anchor(
+                                    'suiviFicheFrais/refuser_fraishorsforfait/' . $frais['idLigneFHF'] . '/' . $idFiche,
+                                    '✗',
+                                    ['class' => 'btn-refuser']
+                                ) ?>
+                            <?php endif; ?>
                         <?php else : ?>
-                            <?= anchor(
-                                'suiviFicheFrais/refuser_fraishorsforfait/' . $frais['idLigneFHF'] . '/' . $idFiche,
-                                '✗',
-                                ['class' => 'btn-refuser']
-                            ) ?>
+                            <span class="btn-reporter-disabled">—</span>
                         <?php endif; ?>
                     </td>
 
